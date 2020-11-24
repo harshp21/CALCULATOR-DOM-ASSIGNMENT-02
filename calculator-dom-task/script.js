@@ -7,10 +7,6 @@ calDisplay.setAttribute('class', 'calculator-display');
 let display = document.createElement('div');
 display.setAttribute('class', 'display-output');
 
-// let display = document.createElement('div');
-// display.setAttribute('class', 'display');
-
-// displayOutput.append(display);
 calDisplay.append(display);
 
 let calNumPadContainer = document.createElement('div');
@@ -26,7 +22,6 @@ numOne.innerText = "1";
 numOne.addEventListener('click', function () {
     display.innerText = display.innerText + '1';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numTwo = calNumPadOptions.cloneNode(true);
@@ -35,7 +30,6 @@ numTwo.innerText = "2";
 numTwo.addEventListener('click', function () {
     display.innerText = display.innerText + '2';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numThree = calNumPadOptions.cloneNode(true);
@@ -44,7 +38,6 @@ numThree.innerText = "3";
 numThree.addEventListener('click', function () {
     display.innerText = display.innerText + '3';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numFour = calNumPadOptions.cloneNode(true);
@@ -53,7 +46,6 @@ numFour.innerText = "4";
 numFour.addEventListener('click', function () {
     display.innerText = display.innerText + '4';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numFive = calNumPadOptions.cloneNode(true);
@@ -62,7 +54,6 @@ numFive.innerText = "5";
 numFive.addEventListener('click', function () {
     display.innerText = display.innerText + '5';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numSix = calNumPadOptions.cloneNode(true);
@@ -71,7 +62,6 @@ numSix.innerText = "6";
 numSix.addEventListener('click', function () {
     display.innerText = display.innerText + '6';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numSeven = calNumPadOptions.cloneNode(true);
@@ -80,7 +70,6 @@ numSeven.innerText = "7";
 numSeven.addEventListener('click', function () {
     display.innerText = display.innerText + '7';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numEight = calNumPadOptions.cloneNode(true);
@@ -89,7 +78,6 @@ numEight.innerText = "8";
 numEight.addEventListener('click', function () {
     display.innerText = display.innerText + '8';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numNine = calNumPadOptions.cloneNode(true);
@@ -98,7 +86,6 @@ numNine.innerText = "9";
 numNine.addEventListener('click', function () {
     display.innerText = display.innerText + '9';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let numZero = calNumPadOptions.cloneNode(true);
@@ -107,7 +94,6 @@ numZero.innerText = "0";
 numZero.addEventListener('click', function () {
     display.innerText = display.innerText + '0';
     updateExpression();
-    updateDisplay(evaluate())
 })
 
 let calNumPadTaskOptions = document.createElement('div');
@@ -119,7 +105,7 @@ divide.innerText = '/';
 
 divide.addEventListener('click', function () {
     if (display.innerText !== '') {
-        evaluate();
+        updateDisplay(evaluate());
         updateTask('/');
     }
 })
@@ -129,7 +115,7 @@ multiply.innerText = 'x';
 
 multiply.addEventListener('click', function () {
     if (display.innerText !== '') {
-        evaluate();
+        updateDisplay(evaluate());
         updateTask('x');
     }
 })
@@ -139,7 +125,7 @@ add.innerText = '+';
 
 add.addEventListener('click', function () {
     if (display.innerText !== '') {
-        evaluate();
+        updateDisplay(evaluate());
         updateTask('+');
     }
 })
@@ -149,7 +135,7 @@ substract.innerText = '-';
 
 substract.addEventListener('click', function () {
     if (display.innerText !== '') {
-        evaluate();
+        updateDisplay(evaluate());
         updateTask('-');
     }
 })
@@ -269,18 +255,23 @@ function deleteNumber() {
 
 function evaluate() {
     let exp = getExpressionToEvaluate();
-    let sum = 0;
-    if (exp.length >= 3) {
-        let num1 = exp.shift();
-        while (exp.length !== 0) {
-            task = exp.shift();
-            num2 = exp.shift();
-            sum = calculate(task, num1, num2);
-            num1 = sum;
+    if (tasks.includes(exp[exp.length - 1]) || exp[exp.length - 1] === '') {
+        return expression;
+    } else {
+        let sum = 0;
+        if (exp.length >= 3) {
+            let num1 = exp.shift();
+            while (exp.length !== 0) {
+                task = exp.shift();
+                num2 = exp.shift();
+                sum = calculate(task, num1, num2);
+                num1 = sum;
+            }
+            return sum;
         }
-        return sum;
+        return expression;
     }
-    return expression[0];
+
 }
 
 function calculate(task, num1, num2) {

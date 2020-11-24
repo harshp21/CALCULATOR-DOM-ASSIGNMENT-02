@@ -25,7 +25,8 @@ numOne.innerText = "1";
 
 numOne.addEventListener('click', function () {
     display.innerText = display.innerText + '1';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numTwo = calNumPadOptions.cloneNode(true);
@@ -33,7 +34,8 @@ numTwo.innerText = "2";
 
 numTwo.addEventListener('click', function () {
     display.innerText = display.innerText + '2';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numThree = calNumPadOptions.cloneNode(true);
@@ -41,7 +43,8 @@ numThree.innerText = "3";
 
 numThree.addEventListener('click', function () {
     display.innerText = display.innerText + '3';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numFour = calNumPadOptions.cloneNode(true);
@@ -49,7 +52,8 @@ numFour.innerText = "4";
 
 numFour.addEventListener('click', function () {
     display.innerText = display.innerText + '4';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numFive = calNumPadOptions.cloneNode(true);
@@ -57,7 +61,8 @@ numFive.innerText = "5";
 
 numFive.addEventListener('click', function () {
     display.innerText = display.innerText + '5';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numSix = calNumPadOptions.cloneNode(true);
@@ -65,7 +70,8 @@ numSix.innerText = "6";
 
 numSix.addEventListener('click', function () {
     display.innerText = display.innerText + '6';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numSeven = calNumPadOptions.cloneNode(true);
@@ -73,7 +79,8 @@ numSeven.innerText = "7";
 
 numSeven.addEventListener('click', function () {
     display.innerText = display.innerText + '7';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numEight = calNumPadOptions.cloneNode(true);
@@ -81,7 +88,8 @@ numEight.innerText = "8";
 
 numEight.addEventListener('click', function () {
     display.innerText = display.innerText + '8';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numNine = calNumPadOptions.cloneNode(true);
@@ -89,7 +97,8 @@ numNine.innerText = "9";
 
 numNine.addEventListener('click', function () {
     display.innerText = display.innerText + '9';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let numZero = calNumPadOptions.cloneNode(true);
@@ -97,7 +106,8 @@ numZero.innerText = "0";
 
 numZero.addEventListener('click', function () {
     display.innerText = display.innerText + '0';
-    evaluate();
+    updateExpression();
+    updateDisplay(evaluate())
 })
 
 let calNumPadTaskOptions = document.createElement('div');
@@ -109,7 +119,8 @@ divide.innerText = '/';
 
 divide.addEventListener('click', function () {
     if (display.innerText !== '') {
-        updateTask('/')
+        evaluate();
+        updateTask('/');
     }
 })
 
@@ -118,7 +129,8 @@ multiply.innerText = 'x';
 
 multiply.addEventListener('click', function () {
     if (display.innerText !== '') {
-        updateTask('x')
+        evaluate();
+        updateTask('x');
     }
 })
 
@@ -127,7 +139,8 @@ add.innerText = '+';
 
 add.addEventListener('click', function () {
     if (display.innerText !== '') {
-        updateTask('+')
+        evaluate();
+        updateTask('+');
     }
 })
 
@@ -136,7 +149,8 @@ substract.innerText = '-';
 
 substract.addEventListener('click', function () {
     if (display.innerText !== '') {
-        updateTask('-')
+        evaluate();
+        updateTask('-');
     }
 })
 
@@ -204,7 +218,7 @@ calNumPadContainer.append(numZero, clear, del, equals);
 calculatorContainer.append(calDisplay, calNumPadContainer);
 document.body.append(calculatorContainer);
 
-let expression = [];
+let expression = '';
 let tasks = ['+', '-', 'x', '/'];
 let results = [];
 
@@ -212,6 +226,7 @@ function clearTask() {
     display.innerText = '';
     expression = '';
 }
+
 
 function updateTask(task) {
     let str = display.innerText;
